@@ -13,7 +13,7 @@
       Class.forName("com.mysql.jdbc.Driver");
       request.setCharacterEncoding("UTF-8");
       
-      String url = "jdbc:mysql://localhost:3306/tripbooster";
+      String url = "jdbc:mysql://localhost:3306/tripbooster?useSSL=false&verifyServerCertificate=false";
       String user = "root";
          String password = "abcd1234";
          
