@@ -51,8 +51,8 @@
 	    con.setAutoCommit(false);
 	
 	    String sql = "SELECT t.*, COUNT(ul.likeNum) AS likeCount" +
-	            " FROM tripTbl t" +
-	            " LEFT JOIN userLikeTbl ul ON t.tripNum = ul.tripNum" +
+	            " FROM triptbl t" +
+	            " LEFT JOIN userLiketbl ul ON t.tripNum = ul.tripNum" +
 	            " WHERE t.tripCode = ? AND t.tripSort = ?" +
 	            " GROUP BY t.tripNum"+
 	            " ORDER BY likeCount DESC";
@@ -86,7 +86,14 @@
                         <p class="card-text"><%= rs.getString("tripLoca") %></p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick = "location.href='/User/userLikeAction.jsp?tripNum=<%=rs.getString("tripNum")%>'">❤</button>
+                                <%if (userName != null) {
+                            		if (userName.equals("관리자")){ %>
+                            			<button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/Admin/tripChange.jsp?tripNum=<%= rs.getString("tripNum") %>'">수정</button>
+					                	<button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/Admin/tripDeleteAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">삭제</button>
+					            <% } else { %>
+					                	<button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/User/userLikeAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">❤</button>
+					            <% } 
+                            	}%>
                             </div>
                             <small class="text-muted">✈ <%= rs.getString("likeCount") %></small>
                         </div>

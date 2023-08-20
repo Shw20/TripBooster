@@ -3,6 +3,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/Search.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/Dropdown.css" rel="stylesheet" type="text/css">
 </head>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-info">
 	<div class="container d-flex align-items-center"">
 		<a class="navbar-brand" href="/index.jsp"><strong>TripBooster</strong></a>
@@ -32,10 +33,9 @@
 		            <a class="dropdown-item" href="${pageContext.request.contextPath}/Trip/tripindex.jsp?tripCode=제주도&tripSort=tour">제주도</a>
                 </div>
             </li>
-            
 		</ul>
 		&nbsp;&nbsp;&nbsp;
-		<form action="/User/SearchResults.jsp" method="get" name="keyword">
+		<form action="/Trip/SearchResults.jsp" method="get" name="keyword">
 			<div class="container-2 d-flex align-items-center">
 				<span class="icon"><i class="fa fa-search"></i></span>
 				<input type="search" name="keyword" id="search" placeholder="Search" />
@@ -43,7 +43,7 @@
 		</form>
 		<form class="d-flex mx-auto">
    						 
-    				</form>	
+    	</form>	
 		<div class="ml-auto">
 			<a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-outline-light" type="submit">로그인</a>
 		</div>

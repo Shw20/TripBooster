@@ -51,8 +51,8 @@
 	    con.setAutoCommit(false);
 	
 	    String sql = "SELECT t.*, COUNT(ul.likeNum) AS likeCount" +
-	            " FROM tripTbl t" +
-	            " LEFT JOIN userLikeTbl ul ON t.tripNum = ul.tripNum" +
+	            " FROM triptbl t" +
+	            " LEFT JOIN userLiketbl ul ON t.tripNum = ul.tripNum" +
 	            " WHERE t.tripCode = ? AND t.tripSort = ?" +
 	            " GROUP BY t.tripNum"+
 	            " ORDER BY likeCount DESC";
@@ -79,7 +79,7 @@
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
                          xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
                          preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <a href="${pageContext.request.contextPath}/Trip/tripChoice.jsp?tripNum=<%= rs.getString("tripNum") %>">
+                        <a href="/Trip/tripChoice.jsp?tripNum=<%= rs.getString("tripNum") %>">
                         <image href="/resources/images/<%= rs.getString("tripImg") %>" width="100%" height="100%" />
                     </svg>
                     <div class="card-body">
@@ -89,7 +89,7 @@
                             <div class="btn-group">
                             	<%if (userName != null) {
                             		if (userName.equals("관리자")){ %>
-                            			<button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/User/userLikeAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">수정</button>
+                            			<button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/Admin/tripChange.jsp?tripNum=<%= rs.getString("tripNum") %>'">수정</button>
 					                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/Admin/tripDeleteAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">삭제</button>
 					            <% } else { %>
 					                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/User/userLikeAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">❤</button>

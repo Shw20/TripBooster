@@ -148,7 +148,7 @@ try {
 	        <svg class="bd-placeholder-img card-img-top" width="100%" height="225"
 	             xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail"
 	             preserveAspectRatio="xMidYMid slice" focusable="false">
-	            <a href="${pageContext.request.contextPath}/Trip/tripChoice.jsp?tripNum=<%=rs.getString("tripNum")%>&tripSort=<%=rs.getString("tripSort")%>">
+	            <a href="/Trip/tripChoice.jsp?tripNum=<%=rs.getString("tripNum")%>&tripSort=<%=rs.getString("tripSort")%>">
 	                <image href="/resources/images/<%=rs.getString("tripImg")%>" width="100%" height="100%" />
 	            </a>
 	        </svg>
@@ -159,7 +159,7 @@ try {
 	                    <% if (userName == null || userName.isEmpty()) { %>
 			                <!-- 로그아웃 상태일 때 버튼이 표시되지 않도록 처리 -->
 			            <% } else if (userName.equals("관리자")) { %>
-			                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='#'">수정</button>
+			                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/Admin/tripChange.jsp?tripNum=<%= rs.getString("tripNum") %>'">수정</button>
 			                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/Admin/tripDeleteAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">삭제</button>
 			            <% } else { %>
 			                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="location.href='/User/userLikeAction.jsp?tripNum=<%= rs.getString("tripNum") %>'">❤</button>

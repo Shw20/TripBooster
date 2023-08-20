@@ -32,7 +32,7 @@
             
 		</ul>
 		&nbsp;&nbsp;&nbsp;
-		<form action="/User/SearchResults.jsp" method="get" name="keyword">
+		<form action="/Trip/SearchResults.jsp" method="get" name="keyword">
 			<div class="container-2 d-flex align-items-center">
 				<span class="icon"><i class="fa fa-search"></i></span>
 				<input type="search" name="keyword" id="search" placeholder="Search" />

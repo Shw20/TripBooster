@@ -12,6 +12,7 @@
         String url = "jdbc:mysql://localhost:3306/tripbooster?useSSL=false&verifyServerCertificate=false";
         String user = "root";
         String password = "abcd1234";
+        String update = "(수정됨)";
 
         String commentNum = request.getParameter("commentNum");
         String newComments = request.getParameter("comments");
@@ -26,7 +27,7 @@
 
             PreparedStatement pstmt = con.prepareStatement(sql);
 
-            pstmt.setString(1, newComments);
+            pstmt.setString(1, newComments + update);
             pstmt.setString(2, commentNum);
 
             pstmt.executeUpdate();
