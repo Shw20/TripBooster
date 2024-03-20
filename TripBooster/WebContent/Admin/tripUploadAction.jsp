@@ -13,17 +13,18 @@
 </head>
 <body>
 <%
+	//업로드 경로
 	String path = "C:/Users/alkon/git/TripBooster/TripBooster/TripBooster/WebContent/resources/images";
 
-    int size = 1024 * 1024 * 10;
-    String file = "";
+    int size = 1024 * 1024 * 10; //사이즈지정
+    String file = ""; //파일업로드 변수
 
     try {
         MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8", new DefaultFileRenamePolicy());
         Enumeration files = multi.getFileNames();
         String str = (String) files.nextElement();
         
-        file = multi.getFilesystemName(str);
+        file = multi.getFilesystemName(str); //파일명 따오기
         
         String tripCode = multi.getParameter("tripCode");
         String tripSort = multi.getParameter("tripSort");
@@ -34,7 +35,7 @@
         String tripContent = multi.getParameter("tripContent");
         String tripTel = multi.getParameter("tripTel");
         
-        if (tripSort == null || tripSort.isEmpty()) {
+        if (tripSort == null || tripSort.isEmpty()) { //값이 없으면 0으로넣기
             tripSort = "0";
         }
         
@@ -55,7 +56,7 @@
             pstmt.setString(2, tripSort);
             pstmt.setString(3, tripName);
             pstmt.setString(4, tripLoca);
-            pstmt.setString(5, file);
+            pstmt.setString(5, file); //파일 업로드가아니라 이미지명임
             pstmt.setString(6, tripPerson);
             pstmt.setString(7, tripParking);
             pstmt.setString(8, tripContent);

@@ -32,27 +32,27 @@
         
         //"서울시 용산구" 키워드에서 "용산구"를 입력하면 아무것도 안 나옴 그래서 for문 추가
         
-        String[] keywords = keyword.split(" "); // 키워드를 공백으로 분리(띄어쓰기하면 다음검색어를 별도로 검색)
+        String[] keywords = keyword.split(" "); // 키워드를 공백으로 분리(띄어쓰기하면 다음 검색어를 별도로 검색)
 
         String sql = "SELECT t.*, COUNT(ul.likeNum) AS likeCount" +
                      " FROM triptbl t" +
                      " LEFT JOIN userLiketbl ul ON t.tripNum = ul.tripNum" +
                      " WHERE ";
-        for (int i = 0; i < keywords.length; i++) {//keyword입력하면 keywords배열로(띄어쓰기구분) 입력돼서 길이만큼 sql문(띠어쓰기 다음 단어 검색)
+        for (int i = 0; i < keywords.length; i++) { //keyword입력하면 keywords배열로(띄어쓰기구분) 입력돼서 길이만큼 sql문(띠어쓰기 다음 단어 검색)
             if (i > 0) {
-                sql += " AND "; // AND 연산자로 모든 키워드 조건을 만족 레코드 검색
+                sql += " OR "; // OR 연산자로 모든 키워드 조건을 만족 레코드 검색
             }
-            sql += "t.tripCode LIKE ? OR t.tripName LIKE ? OR t.tripContent LIKE ?";
+            sql += "t.tripCode LIKE ? OR t.tripName LIKE ? OR t.tripLoca LIKE ?";
         }
 
         sql += " GROUP BY t.tripNum" +
                " ORDER BY likeCount DESC"; // 추가 정렬 조건
-
+               
         PreparedStatement pstmt = con.prepareStatement(sql);
 
         // 각 키워드를 바인딩
         for (int i = 0; i < keywords.length; i++) {
-            String keyword2 = "%" + keywords[i] + "%";
+            String keyword2 = "%" + keywords[i] + "%";  
             pstmt.setString(i * 3 + 1, keyword2); // tripCode 
             pstmt.setString(i * 3 + 2, keyword2); // tripName 
             pstmt.setString(i * 3 + 3, keyword2); // tripContent 

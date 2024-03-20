@@ -135,25 +135,27 @@ try {
 	<div id="map" style="width: 100%; height: 60vh;"></div>
 	
 	<script>
-        window.onload = function () {
-            var map = new naver.maps.Map('map', {
-                center: new naver.maps.LatLng(37.5665, 126.9780), // 서울 좌표
+        window.onload = function () { //페이지가 로드되면
+            var map = new naver.maps.Map('map', { //지도생성
+                center: new naver.maps.LatLng(37.5665, 126.9780), // 초기화(서울) 좌표
                 zoom: 16
             });
 
-            var tripLoca = "<%=rs.getString("tripLoca")%>";
-
+            var tripLoca = "<%=rs.getString("tripLoca")%>"; //주소값
+			
+            //naver지도 geocode 함수 사용해 좌표로 변환
             naver.maps.Service.geocode({ address: tripLoca }, function(status, response) {
                 if (status === naver.maps.Service.Status.OK) {
+                	// 변환된 좌표
                     var location = new naver.maps.LatLng(response.result.items[0].point.y, response.result.items[0].point.x);
-
+					// 좌표에 마커찍고 지도에 보여줌
                     var marker = new naver.maps.Marker({
                         position: location,
                         map: map
                     });
-                    
+                    //좌표중심 화면
                     map.setCenter(location); // 지도의 중심을 마커의 위치로 이동
-                } else {
+                } else { //실패시
                     console.log('주소 변환 실패');
                 }
             });
@@ -267,33 +269,32 @@ try {
 
 <script type="text/javascript">
     function updateOnclick(commentNum, tripNum) {
+    	// 수정할 댓글 가져오기
         var commentElement = document.querySelector('.comment[data-commentnum="' + commentNum + '"]');
-        var textareaElement = document.getElementById("comments");
+        //입력할 textarea 가져오기
+    	var textareaElement = document.getElementById("comments");
+        //폼과 버튼 가져오기
         var form = document.getElementById("comment-form");
         var button = document.getElementById("commentButton");
-        
-        /* var update = $('tbody#commentTable td#comment').text();
-        
-        alert(update); */
-        
+        // 댓글 내용을 textarea에 가져오기
         var commentsValue = commentElement.textContent;
         textareaElement.value = commentsValue;
-        
+        // value값을 "수정"으로 변경
         button.value = "수정";
         
-        // 수정 버튼의 클릭 
+        // 수정 버튼 클릭 시
         button.onclick = function() {
-            var newComment = textareaElement.value;
-            var xhr = new XMLHttpRequest();
+            var newComment = textareaElement.value; //수정된 댓글 내용
+            var xhr = new XMLHttpRequest(); //AJAX로 액션
             xhr.open("POST", "/updateCommentAction.jsp", true);  // 수정 액션 URL로 변경
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     if (xhr.responseText === "success") { //성공시
+                    	// 수정된 내용을 반영
                         commentElement.textContent = newComment;
                         button.value = "작성"; //value값 다시 작성으로
-                        /* update = update+"(수정됨)"; */
-                        button.onclick = function() {
+                        button.onclick = function() { // 클릭시
                             updateOnclick(commentNum, tripNum);
                         };
                         form.action = "/Comments/commentsAction.jsp";  // 작성 액션으로 바꿈
@@ -304,7 +305,7 @@ try {
             xhr.send(params);
         };
         
-        // "작성"
+        // 수정으로 변경
         form.action = "/Comments/updateCommentsAction.jsp?commentNum=" + commentNum + "&tripNum=" + tripNum;
     }
 </script>
