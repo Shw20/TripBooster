@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!--  <script type="text/javascript" src="/resources/js/map.js" ></script> -->
 <%@ include file="/resources/layout/head.jsp"%>
+<!-- tripChoice -->
 <style>
 .trip-content-cell {
     max-height: 100px; /* 적절한 높이 조정 */

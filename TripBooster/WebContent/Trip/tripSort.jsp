@@ -7,7 +7,7 @@
 <%@ include file="/resources/layout/head.jsp"%>
 </head>
 <body>
-
+<!-- tripSort -->
 <%
     request.setCharacterEncoding("UTF8");
     response.setCharacterEncoding("UTF-8");
